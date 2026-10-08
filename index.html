@@ -369,9 +369,285 @@
 
         </section>
 
-        <section id="auditoria-estado" class="card placeholder-section">
+        <section id="auditoria-estado" class="card">
+
+            <span class="badge">Verificación y Trazabilidad</span>
             <h2>5. Auditoría de Configuración e Informes de Estado</h2>
-            <p><em>[Espacio reservado para el siguiente integrante: Auditorías físicas y funcionales, contabilidad del estado de la configuración (CSR)...]</em></p>
+
+            <h3>5.1 ¿Qué es una Auditoría de Configuración?</h3>
+
+            <p>
+                La <strong>auditoría de configuración</strong> permite
+                comprobar que las modificaciones autorizadas se
+                implementaron correctamente y que los elementos
+                de configuración mantienen su integridad,
+                consistencia y documentación correspondiente.
+            </p>
+
+            <p>
+                De acuerdo con Pressman, el seguimiento de una
+                solicitud no garantiza por sí solo que el cambio
+                haya sido implementado adecuadamente. Por ello,
+                se utilizan revisiones técnicas y auditorías
+                de configuración.
+            </p>
+
+            <h3>5.2 Revisión Técnica y Auditoría</h3>
+
+            <div class="grid-2">
+
+                <div class="info-box">
+                    <h3>Revisión Técnica</h3>
+                    <p>
+                        Comprueba la corrección técnica del
+                        elemento modificado y analiza
+                        inconsistencias, omisiones y posibles
+                        efectos secundarios.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Auditoría de Configuración</h3>
+                    <p>
+                        Comprueba que los cambios correspondan
+                        con lo autorizado, que se respetaron
+                        los procedimientos y que las versiones
+                        y documentos estén actualizados.
+                    </p>
+                </div>
+
+            </div>
+
+            <h3>5.3 Comprobaciones de una Auditoría</h3>
+
+            <p>
+                Pressman propone seis comprobaciones fundamentales.
+                Puedes desplegarlas a continuación:
+            </p>
+
+            <details class="acs-details">
+
+                <summary>Ver las seis comprobaciones</summary>
+
+                <ol class="feature-list">
+                    <li>
+                        Comprobar que se implementó el cambio
+                        establecido en la OCI y determinar
+                        si hubo modificaciones adicionales.
+                    </li>
+
+                    <li>
+                        Verificar que se realizó una revisión
+                        técnica del elemento modificado.
+                    </li>
+
+                    <li>
+                        Confirmar que se respetaron el proceso
+                        de desarrollo y los estándares
+                        de ingeniería de software.
+                    </li>
+
+                    <li>
+                        Comprobar que el cambio contiene
+                        información de su autor, fecha y
+                        atributos de configuración.
+                    </li>
+
+                    <li>
+                        Verificar que la modificación fue
+                        registrada y reportada siguiendo
+                        los procedimientos de ACS.
+                    </li>
+
+                    <li>
+                        Confirmar que los elementos de
+                        configuración relacionados también
+                        fueron actualizados correctamente.
+                    </li>
+                </ol>
+
+            </details>
+
+            <h3>5.4 Ejemplo Práctico de Auditoría</h3>
+
+            <p>
+                Si un integrante modifica el diseño de
+                <code>index.html</code>, el equipo debe comprobar
+                que no haya eliminado contenido de otros
+                participantes, que el CSS funcione y que las
+                modificaciones correspondan con lo registrado
+                en el Pull Request.
+            </p>
+
+            <p class="note">
+                <strong>Importante:</strong> un Pull Request
+                facilita la revisión, pero una auditoría de
+                configuración también puede requerir comprobar
+                procedimientos, documentación y consistencia
+                entre diferentes elementos del proyecto.
+            </p>
+
+            <hr class="divider">
+
+            <!-- REPORTE DE ESTADO -->
+            <h3 id="reporte-estado">5.5 Reporte de Estado (REC)</h3>
+
+            <p>
+                El <strong>Reporte del Estado de la Configuración
+                (REC)</strong>, también denominado contabilidad
+                del estado, es una actividad de ACS encargada
+                de registrar y comunicar información sobre
+                las modificaciones de los elementos
+                de configuración.
+            </p>
+
+            <p>
+                Según Pressman, el REC debe permitir responder
+                cuatro preguntas esenciales:
+            </p>
+
+            <div class="grid-2">
+
+                <div class="info-box">
+                    <h3>¿Qué ocurrió?</h3>
+                    <p>
+                        Identifica la modificación realizada
+                        sobre el elemento de configuración.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>¿Quién lo hizo?</h3>
+                    <p>
+                        Registra al responsable de ejecutar
+                        o autorizar el cambio.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>¿Cuándo ocurrió?</h3>
+                    <p>
+                        Permite conocer la fecha o momento
+                        en que se realizó la modificación.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>¿Qué más se afectará?</h3>
+                    <p>
+                        Identifica otros archivos, elementos
+                        o funciones relacionados que pueden
+                        verse afectados.
+                    </p>
+                </div>
+
+            </div>
+
+            <h3>5.6 ¿Cuándo se genera un registro REC?</h3>
+
+            <ul class="feature-list">
+                <li>
+                    Cuando se identifica o actualiza un
+                    elemento de configuración.
+                </li>
+
+                <li>
+                    Cuando la ACC aprueba una solicitud
+                    y emite una OCI.
+                </li>
+
+                <li>
+                    Cuando se realiza una auditoría
+                    y se registran sus resultados.
+                </li>
+            </ul>
+
+            <h3>5.7 Ejemplo de Reporte de Estado</h3>
+
+            <p>
+                La siguiente tabla representa un ejemplo
+                ilustrativo de cómo podría registrarse
+                el seguimiento de cambios de nuestro proyecto.
+            </p>
+
+            <div class="table-container">
+
+                <table class="acs-table">
+
+                    <thead>
+                        <tr>
+                            <th>Registro</th>
+                            <th>Modificación</th>
+                            <th>Responsable</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>REC-001</td>
+                            <td>Estructura inicial del HTML</td>
+                            <td>Integrante 1</td>
+                            <td>
+                                <span class="acs-status completed">
+                                    Completado
+                                </span>
+                            </td>
+                            <td>Por registrar</td>
+                        </tr>
+
+                        <tr>
+                            <td>REC-002</td>
+                            <td>Control de cambio y auditoría</td>
+                            <td>Integrante 2</td>
+                            <td>
+                                <span class="acs-status progress">
+                                    En desarrollo
+                                </span>
+                            </td>
+                            <td>Por registrar</td>
+                        </tr>
+
+                        <tr>
+                            <td>REC-003</td>
+                            <td>Revisión e integración final</td>
+                            <td>Equipo</td>
+                            <td>
+                                <span class="acs-status pending">
+                                    Pendiente
+                                </span>
+                            </td>
+                            <td>Por registrar</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <p class="note">
+                <strong>Nota:</strong> los registros anteriores
+                son ilustrativos. Para presentar un REC real,
+                deben actualizarse con los cambios, responsables
+                y fechas verificables del repositorio.
+            </p>
+
+            <h3>5.8 Relación del REC con Git y GitHub</h3>
+
+            <p>
+                Los commits de Git permiten conocer quién
+                realizó cambios, cuándo se registraron y
+                qué archivos fueron modificados.
+            </p>
+
+            <p>
+                GitHub complementa este seguimiento mediante
+                Pull Requests, revisiones e historial de
+                integración. Estos registros proporcionan
+                evidencias útiles para elaborar el REC.
+            </p>
+
         </section>
 
     </main>
