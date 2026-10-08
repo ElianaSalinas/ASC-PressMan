@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Configuración de Software (GCS)</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <h1>Gestión de Configuración de Software (GCS)</h1>
+            <p class="subtitle">Control, trazabilidad e integridad en el ciclo de vida del desarrollo de software</p>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#introduccion">Introducción</a></li>
+                    <li><a href="#repositorio">El Repositorio</a></li>
+                    <li><a href="#ics-versiones">Identificación (ICS) y Versiones</a></li>
+                    <!-- Enlaces preparados para las secciones de los demás integrantes -->
+                    <li><a href="#control-cambios">Control de Cambios</a></li>
+                    <li><a href="#auditoria-estado">Auditoría e Informes</a></li>
+                    <li><a href="#reporte-estado">Reporte de Estado</a></li>
+                    <li><a href="#conclusion">Conclusión</a></li>
+                    <li><a href="#referencias">Referencias</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- =================================================================
+             INICIO: INTEGRANTE 1 (rama-estructura-y-proceso)
+             ================================================================= -->
+        <!-- SECCIÓN 1: INTRODUCCIÓN -->
+        <section id="introduccion" class="card">
+            <span class="badge">Fundamentos</span>
+            <h2>1. Introducción a la Gestión de Configuración de Software</h2>
+            <p>
+                La <strong>Gestión de Configuración de Software (GCS)</strong> —o <em>Software Configuration Management (SCM)</em>— es una disciplina de garantía de calidad dentro de la Ingeniería de Software cuyo propósito es aplicar dirección técnica y administrativa sobre el diseño, desarrollo y mantenimiento de un sistema. A medida que un proyecto escala y múltiples desarrolladores trabajan de manera concurrente, el cambio se vuelve constante; sin un proceso formal de GCS, este cambio deriva en caos, pérdida de código y regresiones críticas.
+            </p>
+            <p>
+                El proceso de GCS no busca frenar la evolución del software, sino permitir que los cambios se integren de manera controlada, predecible y auditable a través de cuatro pilares fundamentales:
+            </p>
+            <div class="grid-2">
+                <div class="info-box">
+                    <h3>Identificación</h3>
+                    <p>Determinar qué artefactos componen el sistema y definir sus líneas base (<em>baselines</em>).</p>
+                </div>
+                <div class="info-box">
+                    <h3>Control de Versiones y Cambios</h3>
+                    <p>Gestionar la evolución temporal de los artefactos y evaluar el impacto de cada modificación solicitada.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Auditoría de Configuración</h3>
+                    <p>Verificar que el producto construido cumple con los requisitos técnicos y estándares establecidos.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Generación de Informes de Estado</h3>
+                    <p>Registrar y reportar qué cambió, quién lo hizo, cuándo ocurrió y por qué motivo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: EL ROL DEL REPOSITORIO -->
+        <section id="repositorio" class="card">
+            <span class="badge">Infraestructura</span>
+            <h2>2. El Rol del Repositorio de GCS</h2>
+            <p>
+                El <strong>repositorio de configuración</strong> actúa como la "única fuente de la verdad" (<em>Single Source of Truth</em>) para todo el equipo de ingeniería. Lejos de ser un simple directorio de archivos compartidos, un repositorio moderno es un sistema de base de datos especializado que almacena tanto los artefactos del proyecto como los metadatos históricos de su evolución.
+            </p>
+            <h3>Funciones Clave del Repositorio:</h3>
+            <ul class="feature-list">
+                <li><strong>Integridad de Datos y Consistencia:</strong> Garantiza que los artefactos almacenados no sufran corrupción ni sobrescrituras accidentales cuando varios desarrolladores trabajan en paralelo.</li>
+                <li><strong>Trazabilidad Completa:</strong> Vincula cada cambio en el código con su autor, marca de tiempo (<em>timestamp</em>), mensaje descriptivo y requerimiento o ticket asociado.</li>
+                <li><strong>Compartición de Información y Trabajo Concurrente:</strong> Permite aislar entornos de desarrollo mediante ramas (<em>branches</em>) y fusionar el trabajo (<em>merge</em>) de forma estructurada.</li>
+                <li><strong>Integración de Herramientas (CI/CD):</strong> Sirve como punto de disparo para pipelines de Integración Continua, pruebas automatizadas, análisis estático de código y despliegues.</li>
+                <li><strong>Gestión de Líneas Base (Baselines):</strong> Permite congelar instantáneas específicas del proyecto en hitos clave (por ejemplo, el cierre de un sprint o un lanzamiento a producción) para garantizar su reproducibilidad exacta.</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 3: IDENTIFICACIÓN DE OBJETOS (ICS) Y CONTROL DE VERSIONES -->
+        <section id="ics-versiones" class="card">
+            <span class="badge">Núcleo Operativo</span>
+            <h2>3. Identificación de Objetos (ICS) y Control de Versiones</h2>
+
+            <h3>3.1 Identificación de Elementos de Configuración de Software (ICS / SCI)</h3>
+            <p>
+                Para controlar el cambio, primero es necesario identificar qué objetos están sujetos a dicho cambio. Un <strong>Elemento de Configuración de Software (ICS)</strong> —o <em>Software Configuration Item (SCI)</em>— es cualquier unidad de información creada durante el proceso de ingeniería que se trata como una entidad única para fines de gestión.
+            </p>
+            <p>Los ICS se clasifican en dos categorías principales y se relacionan entre sí formando un grafo de dependencias:</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Categoría de ICS</th>
+                            <th>Descripción</th>
+                            <th>Ejemplos de Artefactos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Objetos Básicos</strong></td>
+                            <td>Unidades atómicas de información creadas por los ingenieros durante el análisis, diseño, codificación o pruebas.</td>
+                            <td>Un archivo de código fuente (<code>index.html</code>), un módulo o clase individual, un caso de prueba unitario, un diagrama UML.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Objetos Compuestos</strong></td>
+                            <td>Colección de objetos básicos y otros objetos compuestos que forman un entregable de nivel superior.</td>
+                            <td>Documento de Especificación de Requisitos (SRS), la arquitectura completa del sistema, el paquete compilado de despliegue (<em>build</em>).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="note">
+                <strong>Regla de Identificación:</strong> Cada ICS debe poseer un identificador único, un nombre descriptivo, un propietario responsable y una referencia cruzada que indique de qué otros objetos depende para evaluar el impacto de cualquier cambio.
+            </p>
+
+            <hr class="divider">
+
+            <h3>3.2 Control de Versiones</h3>
+            <p>
+                El <strong>Control de Versiones</strong> combina procedimientos y herramientas automatizadas (como Git) para gestionar las diferentes revisiones y variantes de los ICS creadas durante el ciclo de vida del software. Su objetivo es reconstruir cualquier estado previo del sistema y permitir el desarrollo paralelo sin fricción.
+            </p>
+            <div class="grid-3">
+                <div class="version-card">
+                    <h4>Grafo de Evolución</h4>
+                    <p>Cada modificación aprobada sobre un ICS genera una nueva versión o <em>commit</em> identificado por un hash criptográfico único (ej. SHA-1), preservando el historial inmutable.</p>
+                </div>
+                <div class="version-card">
+                    <h4>Ramas y Variantes (Branching)</h4>
+                    <p>Permite bifurcar la línea principal de desarrollo (<code>main</code>) hacia ramas de características (ej. <code>rama-estructura-y-proceso</code>) para desarrollar y probar cambios de forma aislada.</p>
+                </div>
+                <div class="version-card">
+                    <h4>Versionado Semántico (SemVer)</h4>
+                    <p>Estándar de nomenclatura <code>MAYOR.MENOR.PARCHE</code> (ej. <code>v2.1.4</code>) que comunica claramente el alcance funcional y la compatibilidad de cada versión liberada.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             FIN: INTEGRANTE 1
+             ================================================================= -->
+        <!-- =================================================================
+             ESPACIO RESERVADO PARA LOS DEMÁS INTEGRANTES DEL EQUIPO
+             ================================================================= -->
+
+        <section id="control-cambios" class="card">
+
+            <span class="badge">Gestión de Modificaciones</span>
+            <h2>4. Control de Cambios</h2>
+
+            <p>
+                El <strong>control de cambios</strong> es una actividad
+                fundamental de la Administración de la Configuración
+                del Software (ACS). Consiste en establecer procedimientos
+                para evaluar, autorizar, implementar y verificar las
+                modificaciones realizadas sobre los elementos de
+                configuración del software (ICS).
+            </p>
+
+            <p>
+                Según Pressman, es necesario mantener un equilibrio:
+                demasiado control genera burocracia, mientras que un
+                control insuficiente puede provocar errores, conflictos
+                y pérdida de estabilidad en el sistema.
+            </p>
+
+            <h3>4.1 Niveles de Control de Cambios</h3>
+
+            <p>
+                El nivel de control aumenta conforme el software
+                avanza hacia su publicación y mantenimiento.
+            </p>
+
+            <div class="grid-3">
+
+                <div class="info-box">
+                    <h3>Control Informal</h3>
+                    <p>
+                        Se utiliza antes de establecer una línea de
+                        referencia. El desarrollador puede modificar
+                        su trabajo mientras respete los requisitos
+                        y no afecte otras partes del sistema.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Control del Proyecto</h3>
+                    <p>
+                        Una vez establecida una línea de referencia,
+                        los cambios requieren aprobación del gerente
+                        del proyecto o de la autoridad correspondiente,
+                        dependiendo de su impacto.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Control Formal</h3>
+                    <p>
+                        Se aplica especialmente cuando el producto
+                        ya fue entregado. Las modificaciones siguen
+                        procedimientos de solicitud, evaluación,
+                        autorización y documentación.
+                    </p>
+                </div>
+
+            </div>
+
+            <h3>4.2 Autoridad de Control del Cambio (ACC)</h3>
+
+            <p>
+                La <strong>ACC</strong> es una persona o grupo responsable
+                de evaluar y decidir sobre las solicitudes de cambio.
+                En organizaciones grandes puede funcionar como un
+                comité de control de cambios (CCB).
+            </p>
+
+            <p>
+                Su decisión considera la viabilidad técnica, los
+                costos, los posibles efectos secundarios y el impacto
+                sobre otros elementos del software.
+            </p>
+
+            <h3>4.3 Flujo de una Orden de Cambio de Ingeniería (OCI)</h3>
+
+            <p>
+                Una <strong>Orden de Cambio de Ingeniería (OCI)</strong>
+                se genera cuando una solicitud es aprobada.
+                Especifica el cambio autorizado, sus restricciones
+                y los criterios que permitirán revisarlo y auditarlo.
+            </p>
+
+            <figure class="acs-diagram">
+
+                <figcaption>
+                    Proceso de control del cambio, adaptado de
+                    la figura 22.5 de Pressman.
+                </figcaption>
+
+                <ol class="acs-flow">
+
+                    <li>
+                        <strong>Solicitud del Cambio</strong>
+                        <p>
+                            Se identifica una necesidad y el usuario
+                            solicita una modificación del software.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Evaluación Técnica</strong>
+                        <p>
+                            El desarrollador analiza la viabilidad,
+                            el costo, los riesgos y los efectos
+                            sobre otros componentes.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Reporte y Decisión</strong>
+                        <p>
+                            Se genera un reporte de cambio.
+                            La ACC evalúa la solicitud y decide
+                            si debe aprobarse o rechazarse.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Emisión de la OCI</strong>
+                        <p>
+                            Si se aprueba, se registra la orden,
+                            se establecen las condiciones y
+                            se asignan los responsables.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Implementación</strong>
+                        <p>
+                            Se obtiene la versión correspondiente
+                            del elemento de configuración, se
+                            realiza el cambio y se revisa.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Actualización del Repositorio</strong>
+                        <p>
+                            El elemento modificado se incorpora
+                            nuevamente al repositorio mediante
+                            los mecanismos de control de versiones.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Pruebas y Calidad</strong>
+                        <p>
+                            Se establece una línea de referencia
+                            para pruebas y se ejecutan actividades
+                            de aseguramiento de la calidad.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Integración y Distribución</strong>
+                        <p>
+                            Los cambios aprobados se preparan
+                            para la siguiente versión, se
+                            reconstruye y audita el sistema
+                            y se distribuye la nueva versión.
+                        </p>
+                    </li>
+
+                </ol>
+
+                <div class="acs-rejection">
+                    <strong>¿Qué ocurre si se rechaza la solicitud?</strong>
+                    <p>
+                        El cambio no se implementa y se informa
+                        la decisión al solicitante. La solicitud
+                        queda registrada para mantener la trazabilidad.
+                    </p>
+                </div>
+
+            </figure>
+
+            <h3>4.4 Control de Acceso y Sincronización</h3>
+
+            <div class="grid-2">
+
+                <div class="info-box">
+                    <h3>Control de Acceso</h3>
+                    <p>
+                        Determina quién tiene autorización
+                        para acceder o modificar los elementos
+                        de configuración del proyecto.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Control de Sincronización</h3>
+                    <p>
+                        Busca evitar que los cambios realizados
+                        en paralelo por diferentes integrantes
+                        se sobrescriban o provoquen conflictos.
+                    </p>
+                </div>
+
+            </div>
+
+            <h3>4.5 Aplicación Práctica con GitHub</h3>
+
+            <p>
+                En nuestro proyecto, cada integrante trabaja en
+                una rama independiente. Los cambios se registran
+                mediante commits y posteriormente se proponen
+                mediante Pull Requests.
+            </p>
+
+            <p class="note">
+                <strong>Ejemplo:</strong> si se necesita corregir
+                una sección de <code>index.html</code>, el integrante
+                responsable realiza la modificación en su rama.
+                Antes de integrarla en <code>main</code>, el equipo
+                puede revisar el Pull Request, comprobar el cambio
+                y aprobarlo. Esta es una aplicación simplificada
+                de los principios de control de cambios.
+            </p>
+
+        </section>
+
+        <section id="auditoria-estado" class="card">
+
+            <span class="badge">Verificación y Trazabilidad</span>
+            <h2>5. Auditoría de Configuración e Informes de Estado</h2>
+
+            <h3>5.1 ¿Qué es una Auditoría de Configuración?</h3>
+
+            <p>
+                La <strong>auditoría de configuración</strong> permite
+                comprobar que las modificaciones autorizadas se
+                implementaron correctamente y que los elementos
+                de configuración mantienen su integridad,
+                consistencia y documentación correspondiente.
+            </p>
+
+            <p>
+                De acuerdo con Pressman, el seguimiento de una
+                solicitud no garantiza por sí solo que el cambio
+                haya sido implementado adecuadamente. Por ello,
+                se utilizan revisiones técnicas y auditorías
+                de configuración.
+            </p>
+
+            <h3>5.2 Revisión Técnica y Auditoría</h3>
+
+            <div class="grid-2">
+
+                <div class="info-box">
+                    <h3>Revisión Técnica</h3>
+                    <p>
+                        Comprueba la corrección técnica del
+                        elemento modificado y analiza
+                        inconsistencias, omisiones y posibles
+                        efectos secundarios.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Auditoría de Configuración</h3>
+                    <p>
+                        Comprueba que los cambios correspondan
+                        con lo autorizado, que se respetaron
+                        los procedimientos y que las versiones
+                        y documentos estén actualizados.
+                    </p>
+                </div>
+
+            </div>
+
+            <h3>5.3 Comprobaciones de una Auditoría</h3>
+
+            <p>
+                Pressman propone seis comprobaciones fundamentales.
+                Puedes desplegarlas a continuación:
+            </p>
+
+            <details class="acs-details">
+
+                <summary>Ver las seis comprobaciones</summary>
+
+                <ol class="feature-list">
+                    <li>
+                        Comprobar que se implementó el cambio
+                        establecido en la OCI y determinar
+                        si hubo modificaciones adicionales.
+                    </li>
+
+                    <li>
+                        Verificar que se realizó una revisión
+                        técnica del elemento modificado.
+                    </li>
+
+                    <li>
+                        Confirmar que se respetaron el proceso
+                        de desarrollo y los estándares
+                        de ingeniería de software.
+                    </li>
+
+                    <li>
+                        Comprobar que el cambio contiene
+                        información de su autor, fecha y
+                        atributos de configuración.
+                    </li>
+
+                    <li>
+                        Verificar que la modificación fue
+                        registrada y reportada siguiendo
+                        los procedimientos de ACS.
+                    </li>
+
+                    <li>
+                        Confirmar que los elementos de
+                        configuración relacionados también
+                        fueron actualizados correctamente.
+                    </li>
+                </ol>
+
+            </details>
+
+            <h3>5.4 Ejemplo Práctico de Auditoría</h3>
+
+            <p>
+                Si un integrante modifica el diseño de
+                <code>index.html</code>, el equipo debe comprobar
+                que no haya eliminado contenido de otros
+                participantes, que el CSS funcione y que las
+                modificaciones correspondan con lo registrado
+                en el Pull Request.
+            </p>
+
+            <p class="note">
+                <strong>Importante:</strong> un Pull Request
+                facilita la revisión, pero una auditoría de
+                configuración también puede requerir comprobar
+                procedimientos, documentación y consistencia
+                entre diferentes elementos del proyecto.
+            </p>
+
+            <hr class="divider">
+
+            <!-- REPORTE DE ESTADO -->
+            <h3 id="reporte-estado">5.5 Reporte de Estado (REC)</h3>
+
+            <p>
+                El <strong>Reporte del Estado de la Configuración
+                (REC)</strong>, también denominado contabilidad
+                del estado, es una actividad de ACS encargada
+                de registrar y comunicar información sobre
+                las modificaciones de los elementos
+                de configuración.
+            </p>
+
+            <p>
+                Según Pressman, el REC debe permitir responder
+                cuatro preguntas esenciales:
+            </p>
+
+            <div class="grid-2">
+
+                <div class="info-box">
+                    <h3>¿Qué ocurrió?</h3>
+                    <p>
+                        Identifica la modificación realizada
+                        sobre el elemento de configuración.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>¿Quién lo hizo?</h3>
+                    <p>
+                        Registra al responsable de ejecutar
+                        o autorizar el cambio.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>¿Cuándo ocurrió?</h3>
+                    <p>
+                        Permite conocer la fecha o momento
+                        en que se realizó la modificación.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>¿Qué más se afectará?</h3>
+                    <p>
+                        Identifica otros archivos, elementos
+                        o funciones relacionados que pueden
+                        verse afectados.
+                    </p>
+                </div>
+
+            </div>
+
+            <h3>5.6 ¿Cuándo se genera un registro REC?</h3>
+
+            <ul class="feature-list">
+                <li>
+                    Cuando se identifica o actualiza un
+                    elemento de configuración.
+                </li>
+
+                <li>
+                    Cuando la ACC aprueba una solicitud
+                    y emite una OCI.
+                </li>
+
+                <li>
+                    Cuando se realiza una auditoría
+                    y se registran sus resultados.
+                </li>
+            </ul>
+
+            <h3>5.7 Ejemplo de Reporte de Estado</h3>
+
+            <p>
+                La siguiente tabla representa un ejemplo
+                ilustrativo de cómo podría registrarse
+                el seguimiento de cambios de nuestro proyecto.
+            </p>
+
+            <div class="table-container">
+
+                <table class="acs-table">
+
+                    <thead>
+                        <tr>
+                            <th>Registro</th>
+                            <th>Modificación</th>
+                            <th>Responsable</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>REC-001</td>
+                            <td>Estructura inicial del HTML</td>
+                            <td>Integrante 1</td>
+                            <td>
+                                <span class="acs-status completed">
+                                    Completado
+                                </span>
+                            </td>
+                            <td>Por registrar</td>
+                        </tr>
+
+                        <tr>
+                            <td>REC-002</td>
+                            <td>Control de cambio y auditoría</td>
+                            <td>Integrante 2</td>
+                            <td>
+                                <span class="acs-status progress">
+                                    En desarrollo
+                                </span>
+                            </td>
+                            <td>Por registrar</td>
+                        </tr>
+
+                        <tr>
+                            <td>REC-003</td>
+                            <td>Revisión e integración final</td>
+                            <td>Equipo</td>
+                            <td>
+                                <span class="acs-status pending">
+                                    Pendiente
+                                </span>
+                            </td>
+                            <td>Por registrar</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <p class="note">
+                <strong>Nota:</strong> los registros anteriores
+                son ilustrativos. Para presentar un REC real,
+                deben actualizarse con los cambios, responsables
+                y fechas verificables del repositorio.
+            </p>
+
+            <h3>5.8 Relación del REC con Git y GitHub</h3>
+
+            <p>
+                Los commits de Git permiten conocer quién
+                realizó cambios, cuándo se registraron y
+                qué archivos fueron modificados.
+            </p>
+
+            <p>
+                GitHub complementa este seguimiento mediante
+                Pull Requests, revisiones e historial de
+                integración. Estos registros proporcionan
+                evidencias útiles para elaborar el REC.
+            </p>
+
+        </section>
+
+        <section id="conclusion" class="card">
+
+            <span class="badge">Síntesis Final</span>
+            <h2>6. Conclusión</h2>
+
+            <p>
+                La Administración de la Configuración del Software
+                es esencial para gestionar los cambios durante el
+                desarrollo y mantenimiento de un sistema.
+                Permite identificar los elementos del software,
+                administrar sus versiones y mantener un registro
+                organizado de su evolución.
+            </p>
+
+            <p>
+                El control de cambios, las auditorías y el reporte
+                de estado ayudan a garantizar que las modificaciones
+                se realicen de manera autorizada, verificable y
+                documentada, reduciendo el riesgo de errores
+                y conflictos entre los integrantes del equipo.
+            </p>
+
+            <p>
+                Mediante este proyecto aplicamos estos principios
+                utilizando Git y GitHub, trabajando con ramas
+                independientes, commits descriptivos y Pull Requests.
+                De esta manera, comprendemos tanto los conceptos
+                teóricos de ACS como su utilidad en el desarrollo
+                colaborativo de software.
+            </p>
+
+        </section>
+
+       
+    <section id="referencias" class="card">
+
+        <span class="badge">Fuente Bibliográfica</span>
+        <h2>7. Referencias</h2>
+
+        <p>
+            Pressman, R. S. (2010).
+            <em>Ingeniería del software: un enfoque práctico</em>
+            (7.ª ed.). McGraw-Hill Interamericana.
+        </p>
+
+        <p>
+            <strong>Sección consultada:</strong>
+            Capítulo 22, sección 22.3:
+            El proceso de Administración de la
+            Configuración del Software, pp. 508-515.
+        </p>
+
+    </section>
+
+    <!-- FIN: INTEGRANTE 2 -->
+
+    
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>Proyecto Académico - Ingeniería de Software | Gestión de Configuración de Software (GCS)</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
