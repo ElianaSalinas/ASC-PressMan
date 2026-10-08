@@ -208,3 +208,153 @@ code {
     border-top: 1px solid var(--border-color);
     margin-top: 2rem;
 }
+/* ==========================================
+   INTEGRANTE 2 - CONTROL Y AUDITORÍA ACS
+   ========================================== */
+
+/* Diagrama del flujo OCI */
+.acs-diagram {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.acs-diagram figcaption {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.acs-flow {
+    list-style: none;
+    counter-reset: acs-step;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 0;
+}
+
+.acs-flow li {
+    counter-increment: acs-step;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--primary-light);
+    border-radius: 8px;
+    padding: 1.2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.acs-flow li::before {
+    content: counter(acs-step);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 0.7rem;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+}
+
+.acs-flow li strong {
+    display: block;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.acs-flow li p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.acs-flow li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Caso de solicitud rechazada */
+.acs-rejection {
+    background: #fff7ed;
+    border-left: 4px solid #ea580c;
+    padding: 1rem 1.2rem;
+    border-radius: 6px;
+    margin-top: 1.5rem;
+}
+
+.acs-rejection strong {
+    color: #9a3412;
+}
+
+.acs-rejection p {
+    margin: 0.5rem 0 0;
+    font-size: 0.92rem;
+}
+
+/* Auditoría desplegable */
+.acs-details {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+}
+
+.acs-details summary {
+    color: var(--primary);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.acs-details summary:hover {
+    color: var(--primary-light);
+}
+
+.acs-details[open] summary {
+    margin-bottom: 1rem;
+}
+
+.acs-details .feature-list {
+    padding-left: 1.5rem;
+}
+
+/* Tabla REC */
+.acs-table th {
+    white-space: nowrap;
+}
+
+.acs-table tbody tr:hover {
+    background: #eff6ff;
+}
+
+/* Indicadores de estado */
+.acs-status {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.acs-status.completed {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.acs-status.progress {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.acs-status.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
