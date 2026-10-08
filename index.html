@@ -144,9 +144,229 @@
              ESPACIO RESERVADO PARA LOS DEMÁS INTEGRANTES DEL EQUIPO
              ================================================================= -->
 
-        <section id="control-cambios" class="card placeholder-section">
+        <section id="control-cambios" class="card">
+
+            <span class="badge">Gestión de Modificaciones</span>
             <h2>4. Control de Cambios</h2>
-            <p><em>[Espacio reservado para el siguiente integrante: Proceso de solicitud de cambio, evaluación de impacto, Comité de Control de Cambios (CCB)...]</em></p>
+
+            <p>
+                El <strong>control de cambios</strong> es una actividad
+                fundamental de la Administración de la Configuración
+                del Software (ACS). Consiste en establecer procedimientos
+                para evaluar, autorizar, implementar y verificar las
+                modificaciones realizadas sobre los elementos de
+                configuración del software (ICS).
+            </p>
+
+            <p>
+                Según Pressman, es necesario mantener un equilibrio:
+                demasiado control genera burocracia, mientras que un
+                control insuficiente puede provocar errores, conflictos
+                y pérdida de estabilidad en el sistema.
+            </p>
+
+            <h3>4.1 Niveles de Control de Cambios</h3>
+
+            <p>
+                El nivel de control aumenta conforme el software
+                avanza hacia su publicación y mantenimiento.
+            </p>
+
+            <div class="grid-3">
+
+                <div class="info-box">
+                    <h3>Control Informal</h3>
+                    <p>
+                        Se utiliza antes de establecer una línea de
+                        referencia. El desarrollador puede modificar
+                        su trabajo mientras respete los requisitos
+                        y no afecte otras partes del sistema.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Control del Proyecto</h3>
+                    <p>
+                        Una vez establecida una línea de referencia,
+                        los cambios requieren aprobación del gerente
+                        del proyecto o de la autoridad correspondiente,
+                        dependiendo de su impacto.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Control Formal</h3>
+                    <p>
+                        Se aplica especialmente cuando el producto
+                        ya fue entregado. Las modificaciones siguen
+                        procedimientos de solicitud, evaluación,
+                        autorización y documentación.
+                    </p>
+                </div>
+
+            </div>
+
+            <h3>4.2 Autoridad de Control del Cambio (ACC)</h3>
+
+            <p>
+                La <strong>ACC</strong> es una persona o grupo responsable
+                de evaluar y decidir sobre las solicitudes de cambio.
+                En organizaciones grandes puede funcionar como un
+                comité de control de cambios (CCB).
+            </p>
+
+            <p>
+                Su decisión considera la viabilidad técnica, los
+                costos, los posibles efectos secundarios y el impacto
+                sobre otros elementos del software.
+            </p>
+
+            <h3>4.3 Flujo de una Orden de Cambio de Ingeniería (OCI)</h3>
+
+            <p>
+                Una <strong>Orden de Cambio de Ingeniería (OCI)</strong>
+                se genera cuando una solicitud es aprobada.
+                Especifica el cambio autorizado, sus restricciones
+                y los criterios que permitirán revisarlo y auditarlo.
+            </p>
+
+            <figure class="acs-diagram">
+
+                <figcaption>
+                    Proceso de control del cambio, adaptado de
+                    la figura 22.5 de Pressman.
+                </figcaption>
+
+                <ol class="acs-flow">
+
+                    <li>
+                        <strong>Solicitud del Cambio</strong>
+                        <p>
+                            Se identifica una necesidad y el usuario
+                            solicita una modificación del software.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Evaluación Técnica</strong>
+                        <p>
+                            El desarrollador analiza la viabilidad,
+                            el costo, los riesgos y los efectos
+                            sobre otros componentes.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Reporte y Decisión</strong>
+                        <p>
+                            Se genera un reporte de cambio.
+                            La ACC evalúa la solicitud y decide
+                            si debe aprobarse o rechazarse.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Emisión de la OCI</strong>
+                        <p>
+                            Si se aprueba, se registra la orden,
+                            se establecen las condiciones y
+                            se asignan los responsables.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Implementación</strong>
+                        <p>
+                            Se obtiene la versión correspondiente
+                            del elemento de configuración, se
+                            realiza el cambio y se revisa.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Actualización del Repositorio</strong>
+                        <p>
+                            El elemento modificado se incorpora
+                            nuevamente al repositorio mediante
+                            los mecanismos de control de versiones.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Pruebas y Calidad</strong>
+                        <p>
+                            Se establece una línea de referencia
+                            para pruebas y se ejecutan actividades
+                            de aseguramiento de la calidad.
+                        </p>
+                    </li>
+
+                    <li>
+                        <strong>Integración y Distribución</strong>
+                        <p>
+                            Los cambios aprobados se preparan
+                            para la siguiente versión, se
+                            reconstruye y audita el sistema
+                            y se distribuye la nueva versión.
+                        </p>
+                    </li>
+
+                </ol>
+
+                <div class="acs-rejection">
+                    <strong>¿Qué ocurre si se rechaza la solicitud?</strong>
+                    <p>
+                        El cambio no se implementa y se informa
+                        la decisión al solicitante. La solicitud
+                        queda registrada para mantener la trazabilidad.
+                    </p>
+                </div>
+
+            </figure>
+
+            <h3>4.4 Control de Acceso y Sincronización</h3>
+
+            <div class="grid-2">
+
+                <div class="info-box">
+                    <h3>Control de Acceso</h3>
+                    <p>
+                        Determina quién tiene autorización
+                        para acceder o modificar los elementos
+                        de configuración del proyecto.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Control de Sincronización</h3>
+                    <p>
+                        Busca evitar que los cambios realizados
+                        en paralelo por diferentes integrantes
+                        se sobrescriban o provoquen conflictos.
+                    </p>
+                </div>
+
+            </div>
+
+            <h3>4.5 Aplicación Práctica con GitHub</h3>
+
+            <p>
+                En nuestro proyecto, cada integrante trabaja en
+                una rama independiente. Los cambios se registran
+                mediante commits y posteriormente se proponen
+                mediante Pull Requests.
+            </p>
+
+            <p class="note">
+                <strong>Ejemplo:</strong> si se necesita corregir
+                una sección de <code>index.html</code>, el integrante
+                responsable realiza la modificación en su rama.
+                Antes de integrarla en <code>main</code>, el equipo
+                puede revisar el Pull Request, comprobar el cambio
+                y aprobarlo. Esta es una aplicación simplificada
+                de los principios de control de cambios.
+            </p>
+
         </section>
 
         <section id="auditoria-estado" class="card placeholder-section">
