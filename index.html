@@ -21,6 +21,7 @@
                     <li><a href="#control-cambios">Control de Cambios</a></li>
                     <li><a href="#auditoria-estado">Auditoría e Informes</a></li>
                     <li><a href="#reporte-estado">Reporte de Estado</a></li>
+                    <li><a href="#simulador">Simulador</a></li>
                     <li><a href="#conclusion">Conclusión</a></li>
                     <li><a href="#referencias">Referencias</a></li>
                 </ul>
@@ -653,6 +654,55 @@
 
         </section>
 
+        <!-- =================================================================
+             INICIO: INTEGRANTE 3 (rama-diseno-interactividad-docs)
+             Sección interactiva controlada por js/script.js
+             ================================================================= -->
+        <section id="simulador" class="card">
+
+            <span class="badge">Interactivo</span>
+            <h2>Simulador de capas del proceso de GCS</h2>
+
+            <p>
+                Las actividades de la GCS se organizan en capas alrededor
+                de los elementos de configuración. Explora cada capa,
+                desactívala para ver qué riesgos aparecen o recorre paso
+                a paso cómo se gestiona un cambio.
+            </p>
+
+            <div class="tabs" data-tabs>
+
+                <div class="tab-list" role="tablist" aria-label="Modos del simulador">
+                    <button type="button" role="tab" id="tab-capas"
+                            aria-controls="panel-capas" aria-selected="true">
+                        Capas del proceso
+                    </button>
+                    <button type="button" role="tab" id="tab-cambio"
+                            aria-controls="panel-cambio" aria-selected="false" tabindex="-1">
+                        Recorrido de un cambio
+                    </button>
+                </div>
+
+                <div class="tab-panel" role="tabpanel" id="panel-capas" aria-labelledby="tab-capas">
+                    <div id="capas-sim"></div>
+                </div>
+
+                <div class="tab-panel" role="tabpanel" id="panel-cambio" aria-labelledby="tab-cambio" hidden>
+                    <div id="cambio-sim"></div>
+                </div>
+
+            </div>
+
+            <noscript>
+                <p class="note">
+                    El simulador necesita JavaScript. Actívalo en tu
+                    navegador para usarlo.
+                </p>
+            </noscript>
+
+        </section>
+        <!-- FIN: INTEGRANTE 3 -->
+
         <section id="conclusion" class="card">
 
             <span class="badge">Síntesis Final</span>
@@ -719,6 +769,6 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
